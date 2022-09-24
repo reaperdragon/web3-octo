@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
 
 html,
 body {
@@ -19,6 +19,7 @@ a {
 
 * {
   box-sizing: border-box;
+  caret-color: dodgerblue;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +28,48 @@ a {
   }
   body {
     color: white;
-    background: #0F0F0F;
+    background: #0f0f0f;
   }
+}
+
+.EasyMDEContainer .editor-toolbar {
+  border: none !important;
+}
+
+.EasyMDEContainer .CodeMirror {
+  border: none !important;
+  border-radius: 10px !important;
+  background: #222222;
+  color: white;
+  padding: 10px;
+  caret-color: dodgerblue;
+}
+
+.editor-preview {
+  background-color: #0f0f0f !important;
+}
+
+.CodeMirror-code {
+  height: 60vh;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.CodeMirror
+  .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+  background-color: transparent !important;
+}
+
+pre {
+  padding: 20px;
+  background-color: #0f0f0f;
+}
+
+blockquote {
+  border-left: 5px solid #0f0f0f;
+  padding-left: 20px;
+  margin-left: 0px;
 }
