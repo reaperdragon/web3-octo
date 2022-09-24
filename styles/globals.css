@@ -49,13 +49,23 @@ a {
   background-color: #0f0f0f !important;
 }
 
-.CodeMirror-code {
-  height: 60vh;
+
+.CodeMirror-lines{
+  height: 78vh;
+  overflow-y: scroll;
+}
+
+.CodeMirror-lines::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
 
 
-::-webkit-scrollbar {
-    display: none;
+::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .CodeMirror
