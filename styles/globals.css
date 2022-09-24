@@ -49,10 +49,14 @@ a {
   background-color: #0f0f0f !important;
 }
 
-
 .CodeMirror-lines{
   height: 78vh;
   overflow-y: scroll;
+}
+
+::selection {
+  color:white !important;
+  background:dodgerblue !important ;
 }
 
 .CodeMirror-lines::-webkit-scrollbar { 

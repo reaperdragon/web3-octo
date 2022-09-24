@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import "easymde/dist/easymde.min.css";
@@ -28,6 +28,13 @@ const Upload = () => {
   };
 
   console.log(blog.cover);
+
+  const newOptions = useMemo(() => {
+    return {
+      spellChecker: true,
+      placeholder: "Pop Out your Whole Idea in Detail here... 🧠",
+    };
+  }, []);
 
   return (
     <div className="">
@@ -68,9 +75,9 @@ const Upload = () => {
 
         <SimpleMDE
           className="mt-[40px]"
-          placeholder="Pop Out your Whole Idea in Detail "
           value={blog.content}
           onChange={(e) => setBlog({ ...blog, content: e })}
+          options={newOptions}
         />
       </div>
     </div>
