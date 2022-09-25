@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BundlrContextProvider from "../context/bundlrContext";
 
@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
       <BundlrContextProvider>
         <Component {...pageProps} />
         <ToastContainer
-          position="bottom-center"
+          position="top-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}

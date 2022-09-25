@@ -4,21 +4,28 @@ import { useState } from "react";
 import "easymde/dist/easymde.min.css";
 import { ArrowCircleUp2 } from "iconsax-react";
 import Head from "next/head";
-import { useBundler } from '../context/bundlrContext';
+import { useBundler } from "../context/bundlrContext";
 import { FundWallet } from "../components";
+import { toast } from "react-toastify";
+import { ethers } from "ethers";
+import ContractABI from "../artifacts/contracts/Blog.sol/BlogApp.json";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
 const Upload = () => {
-  const { initialiseBundlr, bundlrInstance, balance } = useBundler();
+  const { initialiseBundlr, bundlrInstance, balance, uploadFile } =
+    useBundler();
 
   const [blog, setBlog] = useState({
     title: "",
     content: "",
+    category: "Blockchain",
     cover: "",
   });
+
+  const [file, setFile] = useState("");
 
   const [loading, setLoading] = useState(false);
   const imageCoverRef = useRef();
@@ -31,6 +38,13 @@ const Upload = () => {
     const uploadFile = e.target.files[0];
     if (!uploadFile) return;
     setBlog({ ...blog, cover: uploadFile });
+    let reader = new FileReader();
+    reader.onload = function () {
+      if (reader.result) {
+        setFile(Buffer.from(reader.result));
+      }
+    };
+    reader.readAsArrayBuffer(uploadFile);
   };
 
   const newOptions = useMemo(() => {
@@ -40,43 +54,111 @@ const Upload = () => {
     };
   }, []);
 
+  const getContract = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const signer = provider.getSigner();
+
+    let contract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      ContractABI.abi,
+      signer
+    );
+    return contract;
+  };
+
+  const handleUpload = async () => {
+    const { title, category, content, cover } = blog;
+    if (title === "") {
+      toast.error("Please provide Title For the Blog");
+    } else if (content === "") {
+      toast.error("Please provide Blog Content For the Blog");
+    } else if (category === "") {
+      toast.error("Please provide Blog Category For the Blog");
+    } else if (cover === "") {
+      toast.error("Please provide Blog Cover image For the Blog");
+    } else {
+      setLoading(true);
+      console.log("Clicking");
+      const url = await uploadFile(file);
+      console.log(url);
+      console.log(url.data.id);
+      publishBlog(url.data.id);
+    }
+  };
+
+  const publishBlog = async (cover) => {
+    console.log(cover);
+    try {
+      const contract = await getContract();
+
+      let uploadDate = String(new Date());
+
+      await contract.createblog(
+        cover,
+        blog.title,
+        blog.content,
+        blog.category,
+        uploadDate
+      );
+
+      setBlog({
+        title: "",
+        content: "",
+        category: "",
+        cover: "",
+      });
+
+      setFile("");
+
+      setLoading(false);
+
+      toast.success("Published Successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong", error);
+      setLoading(false);
+    }
+  };
+
   const handleClear = () => {
     setBlog({
       title: "",
       content: "",
       cover: "",
+      file: "",
     });
   };
 
   console.log(balance);
 
-   if (!bundlrInstance) {
-     return (
-       <div className="justify-center items-center h-screen flex font-body flex-col">
-         <h3 className="text-4xl font-bold">
-           Let&apos;s initialise Bundlr now 💱
-         </h3>
-         <button
-           className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
+  if (!bundlrInstance) {
+    return (
+      <div className="justify-center items-center h-screen flex font-body flex-col">
+        <h3 className="text-4xl font-bold">
+          Let&apos;s initialise Bundlr now 💱
+        </h3>
+        <button
+          className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
             dark:focus:ring-blue-800 font-medium rounded-full text-sm px-8 py-5 text-center mr-2 mb-2 transition-all ease-in-out delay-150 duration-150
             hover:translate-y-1 text-1xl hover:shadow-lg hover:shadow-blue-500/80 mt-2"
-           onClick={initialiseBundlr}
-         >
-           Initialise Bundlr 💸
-         </button>
-       </div>
-     );
-   }
+          onClick={initialiseBundlr}
+        >
+          Initialise Bundlr 💸
+        </button>
+      </div>
+    );
+  }
 
   if (!balance || Number(balance) <= 0) {
     return (
       <div className="flex flex-col items-center justify-center h-screen ">
-        <h3 className="text-4xl font-body text-center" >
+        <h3 className="text-4xl font-body text-center">
           Oops!, Before Publishing Blog Please Add Some Funds.🪙
         </h3>
         <FundWallet />
       </div>
-    )
+    );
   }
 
   return (
@@ -111,7 +193,7 @@ const Upload = () => {
           Select Cover Image 🖼️
         </button>
       </div>
-      <div className="flex flex-col max-w-[1440px] my-0 mx-auto">
+      <div className="flex flex-col max-w-[1440px] my-0 mx-auto font-body">
         <input
           name="title"
           placeholder="Title Goes Here"
@@ -119,6 +201,28 @@ const Upload = () => {
           value={blog.title}
           onChange={(e) => setBlog({ ...blog, title: e.target.value })}
         />
+
+        <label className="labels my-2 px-3">Category</label>
+        <select
+          value={blog.category}
+          onChange={(e) => {
+            setBlog({ ...blog, category: e.target.value });
+          }}
+          name="category"
+          className="bg-[#222222] py-2 px-3 focus:ring-0 outline-0 my-4 mx-4 rounded-lg"
+        >
+          <option>Blockchain</option>
+          <option>Science</option>
+          <option>Space</option>
+          <option>Product Review</option>
+          <option>Education</option>
+          <option>Meditation</option>
+          <option>Q&A</option>
+          <option>Movie</option>
+          <option>Productivity</option>
+          <option>Food</option>
+          <option>Nature</option>
+        </select>
 
         <SimpleMDE
           className="mt-[40px]"
@@ -133,12 +237,13 @@ const Upload = () => {
             dark:focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2  text-center  mb-4 transition-all ease-in-out delay-150 duration-150
             hover:-translate-y-1 text-1xl flex items-center justify-center gap-4 z-50 hover:shadow-lg hover:shadow-blue-500/80"
             disabled={loading}
+            onClick={handleUpload}
           >
             {loading ? (
               "Publishing..."
             ) : (
               <span className="flex items-center justify-center gap-2">
-                Upload <ArrowCircleUp2 size="26" color="#d9e3f0" />
+                Publish <ArrowCircleUp2 size="26" color="#d9e3f0" />
               </span>
             )}
           </button>

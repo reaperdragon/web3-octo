@@ -49,11 +49,6 @@ a {
   background-color: #0f0f0f !important;
 }
 
-.CodeMirror-lines{
-  height: 78vh;
-  overflow-y: scroll;
-}
-
 ::selection {
   color:white !important;
   background:dodgerblue !important ;
@@ -86,4 +81,13 @@ blockquote {
   border-left: 5px solid #0f0f0f;
   padding-left: 20px;
   margin-left: 0px;
+}
+
+
+
+@layer components {
+  .labels {
+    @apply text-2xl;
+  }
+
 }
