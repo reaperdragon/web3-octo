@@ -56,14 +56,14 @@ const Upload = () => {
       />
 
       <div className="max-w-[1440px] mt-2 mb-0 mx-auto md:p-6 flex flex-col items-center justify-center">
-        {blog.cover && (
+        {blog.cover ? (
           <img
             src={window.URL.createObjectURL(blog.cover)}
             alt="image"
-            ref={blog.cover}
+            ref={imageCoverRef}
             className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center"
           />
-        )}
+        ) : null}
         <button
           className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
             dark:focus:ring-blue-800 font-medium rounded-full text-sm px-8 py-5 text-center mr-2 mb-2 transition-all ease-in-out delay-150 duration-150
@@ -89,7 +89,7 @@ const Upload = () => {
           options={newOptions}
         />
 
-        <div className="flex max-w-[1440px] my-0 mx-auto gap-2 px-5 py-3 ">
+        <div className="flex max-w-[1440px] my-0 sm:my-14 mx-auto gap-2 px-5 py-3 ">
           <button
             className="sm:fixed inset-x-0 md:bottom-20 font-body  h-16 w-[200px] left-0 right-0 md:mx-auto  text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
             dark:focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2  text-center  mb-4 transition-all ease-in-out delay-150 duration-150
