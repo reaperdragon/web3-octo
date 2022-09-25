@@ -2,19 +2,20 @@ import React, { useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import "easymde/dist/easymde.min.css";
+import { ArrowCircleUp2 } from "iconsax-react";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
 const Upload = () => {
-  
   const [blog, setBlog] = useState({
     title: "",
     content: "",
     cover: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const imageCoverRef = useRef();
 
   const triggerOnChangeCover = () => {
@@ -36,6 +37,14 @@ const Upload = () => {
     };
   }, []);
 
+  const handleClear = () => {
+    setBlog({
+      title: "",
+      content: "",
+      cover: "",
+    });
+  };
+
   return (
     <div className="">
       <input
@@ -52,7 +61,7 @@ const Upload = () => {
             src={window.URL.createObjectURL(blog.cover)}
             alt="image"
             ref={blog.cover}
-            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center "
+            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center"
           />
         )}
         <button
@@ -85,16 +94,25 @@ const Upload = () => {
             className="sm:fixed inset-x-0 md:bottom-20 font-body  h-16 w-[200px] left-0 right-0 md:mx-auto  text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
             dark:focus:ring-blue-800 font-medium rounded-full text-sm px-5 py-2  text-center  mb-4 transition-all ease-in-out delay-150 duration-150
             hover:-translate-y-1 text-1xl flex items-center justify-center gap-4 z-50 hover:shadow-lg hover:shadow-blue-500/80"
+            disabled={loading}
           >
-            Publish
+            {loading ? (
+              "Publishing..."
+            ) : (
+              <span className="flex items-center justify-center gap-2">
+                Upload <ArrowCircleUp2 size="26" color="#d9e3f0" />
+              </span>
+            )}
           </button>
           <button
             className="sm:fixed inset-x-0 bottom-0 font-body  h-16 w-[200px] left-0 right-0 md:mx-auto  text-white bg-gradient-to-r bg-red-700 hover:bg-gradient-to-br border-spacing-1 focus:ring-4 focus:outline-none 
             border-red focus:ring-red-300 
             dark:focus:ring-red-800 font-medium rounded-full text-sm px-5 py-2  text-center  mb-4 transition-all ease-in-out delay-150 duration-150
             hover:-translate-y-1 text-1xl flex items-center justify-center gap-4 z-50 hover:shadow-lg hover:shadow-red-500/80"
+            onClick={handleClear}
+            disabled={loading}
           >
-            Discard
+            {loading ? "Please Wait..." : "Discard"}
           </button>
         </div>
       </div>
