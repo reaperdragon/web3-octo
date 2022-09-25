@@ -3,12 +3,17 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import "easymde/dist/easymde.min.css";
 import { ArrowCircleUp2 } from "iconsax-react";
+import Head from "next/head";
+import { useBundler } from '../context/bundlrContext';
+import { FundWallet } from "../components";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
 const Upload = () => {
+  const { initialiseBundlr, bundlrInstance, balance } = useBundler();
+
   const [blog, setBlog] = useState({
     title: "",
     content: "",
@@ -28,8 +33,6 @@ const Upload = () => {
     setBlog({ ...blog, cover: uploadFile });
   };
 
-  console.log(blog.cover);
-
   const newOptions = useMemo(() => {
     return {
       spellChecker: true,
@@ -45,8 +48,43 @@ const Upload = () => {
     });
   };
 
+  console.log(balance);
+
+   if (!bundlrInstance) {
+     return (
+       <div className="justify-center items-center h-screen flex font-body flex-col">
+         <h3 className="text-4xl font-bold">
+           Let&apos;s initialise Bundlr now 💱
+         </h3>
+         <button
+           className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 
+            dark:focus:ring-blue-800 font-medium rounded-full text-sm px-8 py-5 text-center mr-2 mb-2 transition-all ease-in-out delay-150 duration-150
+            hover:translate-y-1 text-1xl hover:shadow-lg hover:shadow-blue-500/80 mt-2"
+           onClick={initialiseBundlr}
+         >
+           Initialise Bundlr 💸
+         </button>
+       </div>
+     );
+   }
+
+  if (!balance || Number(balance) <= 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen ">
+        <h3 className="text-4xl font-body text-center" >
+          Oops!, Before Publishing Blog Please Add Some Funds.🪙
+        </h3>
+        <FundWallet />
+      </div>
+    )
+  }
+
   return (
     <div className="">
+      <Head>
+        <title>Octo Publish 🐙</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <input
         id="selectImage"
         style={{ display: "none" }}

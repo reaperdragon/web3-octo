@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Dashboard from "./dashboard";
 
+
 export default function Home() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
 
