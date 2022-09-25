@@ -9,6 +9,7 @@ import { FundWallet } from "../components";
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import ContractABI from "../artifacts/contracts/Blog.sol/BlogApp.json";
+import { useRouter } from "next/router";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -17,6 +18,8 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 const Upload = () => {
   const { initialiseBundlr, bundlrInstance, balance, uploadFile } =
     useBundler();
+  
+  const router = useRouter();
 
   const [blog, setBlog] = useState({
     title: "",
@@ -114,6 +117,8 @@ const Upload = () => {
       setLoading(false);
 
       toast.success("Published Successfully");
+
+      router.push("/dashboard");
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong", error);

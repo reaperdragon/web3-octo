@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          theme="dark"
         />
       </BundlrContextProvider>
     </div>
