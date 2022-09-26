@@ -1,0 +1,11 @@
+type Blog @entity {
+  id: ID!
+  blogcoverhash: String!
+  blogtitle: String!
+  blogcontent: String!
+  category: String!
+  date: String!
+  user: Bytes!
+  createdAt: BigInt!
+  updatedAt: BigInt!
+}
