@@ -84,14 +84,12 @@ const Upload = () => {
       setLoading(true);
       console.log("Clicking");
       const url = await uploadFile(file);
-      console.log(url);
-      console.log(url.data.id);
       publishBlog(url.data.id);
     }
   };
 
   const publishBlog = async (cover) => {
-    console.log(cover);
+  
     try {
       const contract = await getContract();
 
@@ -105,6 +103,8 @@ const Upload = () => {
         uploadDate
       );
 
+      setLoading(false);
+
       setBlog({
         title: "",
         content: "",
@@ -113,8 +113,6 @@ const Upload = () => {
       });
 
       setFile("");
-
-      setLoading(false);
 
       toast.success("Published Successfully");
 
