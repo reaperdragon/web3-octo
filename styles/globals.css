@@ -50,21 +50,20 @@ a {
 }
 
 ::selection {
-  color:white !important;
-  background:dodgerblue !important ;
+  color: white !important;
+  background: dodgerblue !important ;
 }
 
-.CodeMirror-lines::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-     -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+.CodeMirror-lines::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 
-
-::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-     -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 
 .CodeMirror
@@ -83,11 +82,8 @@ blockquote {
   margin-left: 0px;
 }
 
-
-
 @layer components {
   .labels {
     @apply text-2xl;
   }
-
 }

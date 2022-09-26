@@ -18,7 +18,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
 const Upload = () => {
   const { initialiseBundlr, bundlrInstance, balance, uploadFile } =
     useBundler();
-  
+
   const router = useRouter();
 
   const [blog, setBlog] = useState({
@@ -186,7 +186,10 @@ const Upload = () => {
             src={window.URL.createObjectURL(blog.cover)}
             alt="image"
             ref={imageCoverRef}
-            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center"
+            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center cursor-pointer"
+            onClick={() => {
+              imageCoverRef.current.click();
+            }}
           />
         ) : null}
         <button
@@ -214,7 +217,7 @@ const Upload = () => {
             setBlog({ ...blog, category: e.target.value });
           }}
           name="category"
-          className="bg-[#222222] py-2 px-3 focus:ring-0 outline-0 my-4 mx-4 rounded-lg"
+          className="bg-[#222222] py-2 px-3 focus:ring-0 outline-0 my-4 mx-4 rounded-lg cursor-pointer"
         >
           <option>Blockchain</option>
           <option>Science</option>
