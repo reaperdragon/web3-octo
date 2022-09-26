@@ -217,7 +217,7 @@ const Upload = () => {
             setBlog({ ...blog, category: e.target.value });
           }}
           name="category"
-          className="bg-[#222222] py-2 px-3 focus:ring-0 outline-0 my-4 mx-4 rounded-lg cursor-pointer"
+          className="bg-[#1E364A] py-2 px-3 focus:ring-0 outline-0 my-4 mx-4 rounded-lg cursor-pointer"
         >
           <option>Blockchain</option>
           <option>Science</option>
@@ -233,7 +233,7 @@ const Upload = () => {
         </select>
 
         <SimpleMDE
-          className="mt-[40px]"
+          className="mt-[40px] md:my-4 md:mx-4 "
           value={blog.content}
           onChange={(e) => setBlog({ ...blog, content: e })}
           options={newOptions}
