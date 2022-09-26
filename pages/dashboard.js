@@ -1,7 +1,7 @@
 import { gql, useApolloClient } from "@apollo/client";
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import { Header } from "../components";
+import { Footer, Header } from "../components";
 import { truncateEthAddress } from "../utils/trucAddress";
 
 const url = `http://arweave.net/`;
@@ -99,6 +99,7 @@ const Dashboard = () => {
             ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
