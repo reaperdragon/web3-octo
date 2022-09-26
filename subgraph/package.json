@@ -1,13 +1,13 @@
 {
-  "name": "octo-app",
+  "name": "octo-clone",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ Aakrut/octo-app",
-    "create-local": "graph create --node http://localhost:8020/ Aakrut/octo-app",
-    "remove-local": "graph remove --node http://localhost:8020/ Aakrut/octo-app",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 Aakrut/octo-app",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ aakrut/octo-clone",
+    "create-local": "graph create --node http://localhost:8020/ aakrut/octo-clone",
+    "remove-local": "graph remove --node http://localhost:8020/ aakrut/octo-clone",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 aakrut/octo-clone",
     "test": "graph test"
   },
   "dependencies": {
