@@ -37,7 +37,7 @@ const Header = () => {
             : `rounded-[64px] px-6 font-body flex items-center justify-between max-w-6xl my-2 mx-auto h-16 md:px-4 md:mx-5`
         }
       >
-        <h2>Octo 🐙</h2>
+        <h2 className="text-2xl">Octo 🐙</h2>
         <ul className="flex gap-3 items-center justify-center">
           <li>
             <Link href="/dashboard">
