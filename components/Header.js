@@ -33,19 +33,19 @@ const Header = () => {
       <nav
         className={
           hasScrolled
-            ? `px-6 font-body flex items-center justify-between max-w-6xl my-2 mx-auto h-16 md:px-4 md:mx-5 backdrop-blur-sm bg-black/40`
-            : `rounded-[64px] px-6 font-body flex items-center justify-between max-w-6xl my-2 mx-auto h-16 md:px-4 md:mx-5`
+            ? `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5 backdrop-blur-sm bg-[#0c4a6e]/40`
+            : `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5`
         }
       >
         <h2 className="text-2xl">Octo 🐙</h2>
-        <ul className="flex gap-3 items-center justify-center">
+        <ul className="flex gap-3 items-center justify-center transition-all">
           <li>
             <Link href="/dashboard">
               <a
                 className={
                   currentRoute === "/dashboard"
                     ? "text-white text-base font-medium"
-                    : "text-gray-500 font-normal"
+                    : "text-gray-500 font-normal hover:text-white"
                 }
               >
                 Home
@@ -58,7 +58,7 @@ const Header = () => {
                 className={
                   currentRoute === "/search"
                     ? "text-white text-base font-medium"
-                    : "text-gray-500 font-normal"
+                    : "text-gray-500 font-normal hover:text-white"
                 }
               >
                 Search
@@ -71,7 +71,7 @@ const Header = () => {
                 className={
                   currentRoute === "/upload"
                     ? "text-white text-base font-medium"
-                    : "text-gray-500 font-normal"
+                    : "text-gray-500 font-normal hover:text-white"
                 }
               >
                 Upload

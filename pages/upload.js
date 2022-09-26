@@ -5,7 +5,7 @@ import "easymde/dist/easymde.min.css";
 import { ArrowCircleUp2 } from "iconsax-react";
 import Head from "next/head";
 import { useBundler } from "../context/bundlrContext";
-import { FundWallet } from "../components";
+import { FundWallet, Header } from "../components";
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import ContractABI from "../artifacts/contracts/Blog.sol/BlogApp.json";
@@ -172,6 +172,7 @@ const Upload = () => {
         <title>Octo Publish 🐙</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <input
         id="selectImage"
         style={{ display: "none" }}
