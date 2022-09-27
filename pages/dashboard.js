@@ -65,12 +65,12 @@ const Dashboard = () => {
       <Header />
       <div className="mt-8 font-body">
         <h1 className=" text-center text-9xl font-bold">Octo 🐙</h1>
-        <div className="my-10 grid overflow-hidden grid-cols-3 grid-rows-2 gap-6  h-max md:grid-cols-2 sm:grid-cols-1 px-[28px] sm:px-1 sm:gap-1 md:gap-y-1 max-w-[1440px] my-0 mx-auto md:gap-y-8 sm:gap-y-6">
+        <div className="my-10 grid overflow-hidden grid-cols-3 grid-rows-2 gap-6  h-max md:grid-cols-2 sm:grid-cols-1 px-[28px] sm:px-1 sm:gap-1  max-w-[1440px] mx-auto md:gap-y-8 sm:gap-y-4">
           {blogs &&
             blogs?.blogs?.map((data) => (
               <div
                 key={data.id}
-                className="w-full h-[418px] p-3 border border-sky-500/20 rounded-xl hover:bg-[#1E364A] cursor-pointer hover:border-0"
+                className="w-full h-[418px] p-3 border sm:border-0 border-sky-500/20 rounded-xl hover:bg-[#1E364A] sm:bg-[#1E364A] cursor-pointer hover:border-0"
               >
                 <div className="w-full h-[300px] rounded-lg relative">
                   <img
