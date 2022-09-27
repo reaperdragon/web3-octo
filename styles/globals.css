@@ -77,7 +77,8 @@ pre {
 }
 
 blockquote {
-  border-left: 5px solid #001c35;
+  border-left: 2px solid #001c35;
+  border-radius: 10px;
   padding-left: 20px;
   margin-left: 0px;
 }
