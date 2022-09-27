@@ -10,7 +10,7 @@ const Header = () => {
 
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  const [addr,setAddr] = useState("");
+  const [addr, setAddr] = useState("");
 
   const changeNavbar = () => {
     if (window.scrollY >= 20) {
@@ -27,19 +27,19 @@ const Header = () => {
   useEffect(() => {
     const addr = localStorage.getItem("walletAddress");
     setAddr(addr);
-  },[])
+  }, []);
 
   return (
-    <section className="sticky top-0 z-[99999] w-full px-2 py-2 sm:px-4 transition-all">
+    <section className="sticky top-0 z-[99999] w-full px-2 py-2 sm:px-4 transition-all ">
       <nav
         className={
           hasScrolled
-            ? `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5 backdrop-blur-sm bg-[#0c4a6e]/40`
-            : `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5`
+            ? `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5 backdrop-blur-sm bg-[#0c4a6e]/40 sm:px-1 ssm:p-1`
+            : `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5 sm:px-1 ssm:p-1`
         }
       >
-        <h2 className="text-2xl sm:text-base">Octo 🐙</h2>
-        <ul className="flex gap-3 items-center justify-center transition-all list-none sm:invisible">
+        <h2 className="text-2xl ssm:text-[10px]">Octo</h2>
+        <ul className="flex gap-3 items-center justify-center transition-all list-none sm:hidden">
           <li>
             <Link href="/dashboard">
               <a
@@ -81,13 +81,13 @@ const Header = () => {
           </li>
         </ul>
 
-        <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 sm:invisible">
+        <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 sm:hidden">
           {truncateEthAddress(addr)}
         </p>
 
-        {/* <div className="hidden sm:block">
+        <div className="hidden sm:block">
           <HambergerMenu size="32" color="#d9e3f0" />
-        </div> */}
+        </div>
       </nav>
     </section>
   );

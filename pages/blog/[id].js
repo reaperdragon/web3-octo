@@ -113,8 +113,9 @@ const Blog = () => {
               </div>
             </div>
           </div>
-          <div className="px-10 max-w-[800px] mx-auto my-1 sm:px-6 prose text-white">
+          <div className="px-10 max-w-[800px] mx-auto my-1 sm:px-0 sm:text-xs ssm:text-sm prose text-white border-2 border-white">
             <ReactMarkdown
+              
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               className=""

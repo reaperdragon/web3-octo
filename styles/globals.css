@@ -117,26 +117,21 @@ blockquote {
 
 @media (max-width: 395px) {
   .prose :where(img):not(:where([class~="not-prose"] *)) {
-    max-width: 390px;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: center;
     border-radius: 10px;
+    padding: 0 15px;
   }
 }
 
-@media (max-with:640px) {
-  .prose{
-    max-width: 100%;
+@media (max-with: 400px) {
+  .prose {
+    width: 100%;
   }
-}
-
-.prose {
-  max-width: 1024px;
-  margin: 0 auto;
-  color: white !important;
 }
 
 button {
