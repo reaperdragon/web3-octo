@@ -1,5 +1,6 @@
 import { gql, useApolloClient } from "@apollo/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { Footer, Header } from "../components";
 import { truncateEthAddress } from "../utils/trucAddress";
@@ -22,6 +23,8 @@ const Dashboard = () => {
   const [blogs, setBlogs] = useState([]);
 
   const clientApollo = useApolloClient();
+
+  const router = useRouter();
 
   const [addr, setAddr] = useState("");
 
@@ -69,6 +72,7 @@ const Dashboard = () => {
               <div
                 key={data.id}
                 className="w-full h-[418px] p-3 border sm:border-0 border-sky-500/20 rounded-xl hover:bg-[#1E364A] sm:bg-[#1E364A] cursor-pointer hover:border-0"
+                onClick={() => router.push(`blog/${data.id}`)}
               >
                 <div className="w-full h-[300px] rounded-lg relative">
                   <img
