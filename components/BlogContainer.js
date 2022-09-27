@@ -1,9 +1,49 @@
-import React from 'react'
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { truncateEthAddress } from "../utils/trucAddress";
 
-const BlogContainer = () => {
+const url = `http://arweave.net/`;
+
+const BlogContainer = ({ data }) => {
+  const router = useRouter();
+  const [addr, setAddr] = useState("");
+
+  useEffect(() => {
+    const addr = localStorage.getItem("walletAddress");
+    setAddr(addr);
+  }, []);
+  
   return (
-    <div>BlogContainer</div>
-  )
-}
+    <div
+      key={data.id}
+      className="w-full h-[418px] p-3 border sm:border-0 border-sky-500/20 rounded-xl hover:bg-[#1E364A] sm:bg-[#1E364A] cursor-pointer hover:border-0"
+      onClick={() => router.push(`blog/${data.id}`)}
+    >
+      <div className="w-full h-[300px] rounded-lg relative">
+        <img
+          src={url + data.blogcoverhash}
+          alt={data.blogtitle}
+          className="w-full h-full rounded-lg"
+        />
+        <div className="flex items-center justify-center">
+          <p className="absolute w-auto text-center bottom-2 left-auto right-auto backdrop-blur-sm bg-white/40 p-4 rounded-full  ">
+            <span className="text-transparent font-semibold bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800">
+              {data.category}
+            </span>
+          </p>
+        </div>
+      </div>
+      <h3 className="text-white text-3xl my-2 font-semibold">
+        {data.blogtitle}
+      </h3>
+      <p className="">
+        Owner:{" "}
+        <span className="text-transparent font-semibold bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800">
+          {truncateEthAddress(addr)}
+        </span>
+      </p>
+    </div>
+  );
+};
 
-export default BlogContainer
+export default BlogContainer;
