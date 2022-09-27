@@ -12,10 +12,8 @@ const FETCH_BLOGS = gql`
       id
       blogcoverhash
       blogtitle
-      blogcontent
       category
       user
-      createdAt
     }
   }
 `;
