@@ -133,8 +133,6 @@ const Upload = () => {
     });
   };
 
-  console.log(balance);
-
   if (!bundlrInstance) {
     return (
       <div className="justify-center items-center h-screen flex font-body flex-col">

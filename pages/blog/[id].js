@@ -2,7 +2,7 @@ import { gql, useApolloClient } from "@apollo/client";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { Footer, Header } from "../../components";
+import { BlogContainer, Footer, Header } from "../../components";
 import ReactMarkdown from "react-markdown";
 import moment from "moment/moment";
 import { truncateEthAddress } from "../../utils/trucAddress";
@@ -54,11 +54,6 @@ const Blog = () => {
         const b = data?.blogs?.find((blog) => blog.id === router.query.id);
 
         setBlog(b);
-
-        const rel = otherBlogs?.find(
-          (related) => related.category === blog.category
-        );
-        setRelatedBlogs(rel);
       })
       .catch((error) => {
         console.error(error);
@@ -69,9 +64,7 @@ const Blog = () => {
     getBlogs();
   }, [router.query.id]);
 
-  console.log(blog);
-
-  console.log(relatedBlogs);
+  // console.log(otherBlogs.filter((other)=> other?.category === blog?.category))
 
   return (
     <div className="font-body  text-white">

@@ -60,8 +60,6 @@ const Search = () => {
    useEffect(() => {
      getBlogs();
    }, [searchFilter, getBlogs]);
-
-  console.log(blogs)
   
   return (
     <div className="font-body">

@@ -19,7 +19,7 @@ const FundWallet = () => {
             hover:-translate-y-1 text-1xl flex items-center justify-center gap-4 z-50 hover:shadow-lg hover:shadow-blue-500/80"
         onClick={() => fundWallet(+value)}
       >
-        💱 Add Funds
+        Add Funds 💱
       </button>
     </div>
   );
