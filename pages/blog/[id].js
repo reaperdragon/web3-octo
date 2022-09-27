@@ -74,8 +74,6 @@ const Blog = () => {
 
   const rl = otherBlogs.filter((other) => other?.category === blog?.category);
 
-  // console.log(otherBlogs.filter((other)=> other?.category === blog?.category))
-
   return (
     <div className="font-body  text-white">
       <Head>
@@ -164,7 +162,6 @@ const Blog = () => {
           <h2>Related to {blog?.category}</h2>
         </div>
       ) : null}
-
       <div className="my-10 grid overflow-hidden grid-cols-3 gap-6 h-max md:grid-cols-2 sm:grid-cols-1 px-[28px] sm:px-1 sm:gap-1  max-w-[1440px] mx-auto md:gap-y-8 sm:gap-y-4">
         {rl && rl?.map((data) => <BlogContainer data={data} key={data.id} />)}
       </div>
