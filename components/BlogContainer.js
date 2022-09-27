@@ -12,7 +12,7 @@ const BlogContainer = ({ data }) => {
     const addr = localStorage.getItem("walletAddress");
     setAddr(addr);
   }, []);
-  
+
   return (
     <div
       key={data.id}
@@ -34,7 +34,9 @@ const BlogContainer = ({ data }) => {
         </div>
       </div>
       <h3 className="text-white text-3xl my-2 font-semibold">
-        {data.blogtitle}
+        {data?.blogtitle?.length > 20
+          ? data?.blogtitle?.slice(0, 20) + "..."
+          : data?.blogtitle}
       </h3>
       <p className="">
         Owner:{" "}
