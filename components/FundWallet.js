@@ -9,7 +9,7 @@ const FundWallet = () => {
     <div>
       <h2>You Current Balance is : {balance || 0} $BNDLR</h2>
       <input
-        className="bg-transparent font-body mt-3 py-1 px-2 focus:ring-0 outline-0  text-2xl"
+        className="bg-transparent font-body mt-3 py-1 px-2 focus:ring-0 outline-0  text-2xl outline-none border-none"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
