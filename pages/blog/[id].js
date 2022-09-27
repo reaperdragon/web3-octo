@@ -9,6 +9,7 @@ import { truncateEthAddress } from "../../utils/trucAddress";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeRaw from "rehype-raw";
 
 const url = `http://arweave.net/`;
 
@@ -81,8 +82,8 @@ const Blog = () => {
       <Header />
       <section className="max-w-[1440px] my-10 mx-auto flex flex-col">
         <div className="flex flex-col gap-2 ">
-          <div className="flex flex-col gap-2 items-center justify-center">
-            <div className="max-w-[800px] max-h-[400px] relative rounded-xl mb-10 md:max-w-[680px] md:max-h-[400px]">
+          <div className="flex flex-col gap-2 items-center justify-center ">
+            <div className="max-w-[800px] max-h-[400px] relative rounded-xl mb-10 md:max-w-[680px] md:max-h-[400px] mx-auto my-0">
               <img
                 src={url + blog?.blogcoverhash}
                 alt={blog.category}
@@ -96,7 +97,7 @@ const Blog = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mx-auto my-0">
               <h2 className="text-white text-3xl my-2 font-semibold text-center">
                 {blog?.blogtitle}
               </h2>
@@ -112,8 +113,11 @@ const Blog = () => {
               </div>
             </div>
           </div>
-          <div className="px-10 max-w-[1024px] mx-auto my-1 sm:px-6">
-            <ReactMarkdown className=""
+          <div className="px-10 max-w-[800px] mx-auto my-1 sm:px-6 prose text-white">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              className=""
               components={{
                 code({ node, inline, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");

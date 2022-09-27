@@ -1,3 +1,4 @@
+import { HambergerMenu } from "iconsax-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -37,8 +38,8 @@ const Header = () => {
             : `rounded-lg px-6 font-body flex items-center justify-between max-w-[1440px] my-2 mx-auto h-16 md:px-4 md:mx-5`
         }
       >
-        <h2 className="text-2xl">Octo 🐙</h2>
-        <ul className="flex gap-3 items-center justify-center transition-all">
+        <h2 className="text-2xl sm:text-base">Octo 🐙</h2>
+        <ul className="flex gap-3 items-center justify-center transition-all list-none sm:invisible">
           <li>
             <Link href="/dashboard">
               <a
@@ -80,9 +81,13 @@ const Header = () => {
           </li>
         </ul>
 
-        <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800">
+        <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 sm:invisible">
           {truncateEthAddress(addr)}
         </p>
+
+        {/* <div className="hidden sm:block">
+          <HambergerMenu size="32" color="#d9e3f0" />
+        </div> */}
       </nav>
     </section>
   );

@@ -28,7 +28,7 @@ a {
   }
   body {
     color: white;
-    background: #001C35;
+    background: #001c35;
   }
 }
 
@@ -39,14 +39,14 @@ a {
 .EasyMDEContainer .CodeMirror {
   border: none !important;
   border-radius: 10px !important;
-  background: #1E364A;
+  background: #1e364a;
   color: white;
   padding: 10px;
   caret-color: dodgerblue;
 }
 
 .editor-preview {
-  background-color: #001C35 !important;
+  background-color: #001c35 !important;
 }
 
 ::selection {
@@ -73,11 +73,11 @@ a {
 
 pre {
   padding: 20px;
-  background-color: #001C35;
+  background-color: #001c35;
 }
 
 blockquote {
-  border-left: 5px solid #001C35;
+  border-left: 5px solid #001c35;
   padding-left: 20px;
   margin-left: 0px;
 }
@@ -86,4 +86,66 @@ blockquote {
   .labels {
     @apply text-2xl;
   }
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  color: darkgray;
+  margin-right: 0;
+}
+
+.prose :where(img):not(:where([class~="not-prose"] *)) {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  border-radius: 10px;
+}
+
+@media (max-width: 640px) {
+  .prose :where(img):not(:where([class~="not-prose"] *)) {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 395px) {
+  .prose :where(img):not(:where([class~="not-prose"] *)) {
+    max-width: 390px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    border-radius: 10px;
+  }
+}
+
+@media (max-with:640px) {
+  .prose{
+    max-width: 100%;
+  }
+}
+
+.prose {
+  max-width: 1024px;
+  margin: 0 auto;
+  color: white !important;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.prose :where(strong):not(:where([class~="not-prose"] *)) {
+  color: white !important;
+  font-weight: 600;
 }
