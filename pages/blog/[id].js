@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeRaw from "rehype-raw";
+import { Edit } from "iconsax-react";
 
 const url = `http://arweave.net/`;
 
@@ -34,6 +35,8 @@ const Blog = () => {
   const [blog, setBlog] = useState([]);
   const [otherBlogs, setOtherBlogs] = useState([]);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
+
+  const [addr, setAddr] = useState("");
 
   const clientApollo = useApolloClient();
 
@@ -63,6 +66,11 @@ const Blog = () => {
   useEffect(() => {
     getBlogs();
   }, [router.query.id]);
+
+  useEffect(() => {
+    const addr = localStorage.getItem("walletAddress");
+    setAddr(addr);
+  }, []);
 
   // console.log(otherBlogs.filter((other)=> other?.category === blog?.category))
 
@@ -103,6 +111,18 @@ const Blog = () => {
                   </span>
                 </p>
                 <p className="text-white/50">{moment(blog?.date).fromNow()}</p>
+
+                <div>
+                  {blog.user === addr ? (
+                    <div
+                      className={`${
+                        blog.user === addr ? `block cursor-pointer` : `hidden`
+                      } `}
+                    >
+                      <Edit size="32" color="#d9e3f0" />
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>

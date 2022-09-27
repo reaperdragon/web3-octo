@@ -20,6 +20,7 @@ a {
 * {
   box-sizing: border-box;
   caret-color: dodgerblue;
+  scroll-behavior: smooth;
 }
 
 @media (prefers-color-scheme: dark) {
