@@ -2,7 +2,7 @@
 
 <img width="1600" alt="credit" src="https://user-images.githubusercontent.com/67114280/192802079-d5db390f-aac4-486f-b370-817ac9bfbffa.png">
 
-### Built with Next Js, Hardhat, Solidity, IPFS, The Graph Protocol and Tailwind CSS.
+### Built with Next Js, Hardhat, Solidity, Arweave, Bundlr, The Graph Protocol and Tailwind CSS.
 
 ### Functionalities
 
@@ -23,7 +23,9 @@
 - Network : [Polygon](https://polygon.technology/)
 - Style : [Tailwind CSS](https://tailwindcss.com/)
 - State management : [GraphQL Apollo Client](https://www.apollographql.com/)
+- Toast: [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
 - Icons : [Iconsax React](https://iconsax-react.pages.dev/)
+
 
 
 ### Installation
