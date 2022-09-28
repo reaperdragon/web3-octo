@@ -192,7 +192,7 @@ const Upload = () => {
   if (!bundlrInstance) {
     return (
       <div className="justify-center items-center h-screen flex font-body flex-col">
-        <h3 className="text-4xl font-bold">
+        <h3 className="text-4xl font-bold sm:text-xl">
           Let&apos;s initialise Bundlr now 💱
         </h3>
         <button
@@ -226,7 +226,7 @@ const Upload = () => {
     <div className="">
       <Head>
         <title>Octo Publish 🐙</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/octo.png" />
       </Head>
       <Header />
       <input

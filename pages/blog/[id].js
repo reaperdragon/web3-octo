@@ -81,7 +81,7 @@ const Blog = () => {
     <div className="font-body  text-white">
       <Head>
         <title>{blog?.blogtitle} | Octo 🐙</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/octo.png" />
       </Head>
       <Header />
       <section className="max-w-[1440px] my-10 mx-auto flex flex-col">

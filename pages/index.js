@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Dashboard from "./dashboard";
 
-
 export default function Home() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
 
@@ -32,19 +31,23 @@ export default function Home() {
     <div>
       <Head>
         <title>Octo 🐙</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/octo.png" />
       </Head>
       {isWalletConnected && localStorage.getItem("walletAddress") ? (
         <Dashboard />
       ) : (
         <div className="h-screen flex items-center  font-body justify-center text-center">
           <div>
-            <h3 className="h-[50px] animate-bounce text-3xl">🐙</h3>
+            <img
+              src="/octo.png"
+              alt="logo"
+              className="h-[150px] animate-bounce"
+            />
             <h2 className="text-[80px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 my-2 leading-[120px] sm:text-[50px] md:leading-normal sm:text-[30px]">
               The Web 3 Publishing Hub{" "}
             </h2>
             <p className="semibold text-gray-500 my-[26px] font-medium text-3xl sm:text-2xl">
-              Built with Next Js, Arweave, Hardhat,Polygon Mumbai and All the
+              Built with Next Js, Arweave, Hardhat, Polygon Mumbai and All the
               CSS Magic with Tailwind CSS
             </p>
             <button

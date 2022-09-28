@@ -64,7 +64,7 @@ const Search = () => {
     <div className="font-body">
       <Head>
         <title>Octo 🐙 Search</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/octo.png" />
       </Head>
       <Header />
       <div className="flex items-center justify-center mt-8 mb-3">
@@ -85,7 +85,14 @@ const Search = () => {
         </div>
       ) : (
         <div className="flex h-full items-center justify-center">
-          <h1 className="items-center justify-center my-10">Search Blog 🐙</h1>
+          <h1 className="items-center justify-center my-10">
+            Search Blog{" "}
+            <img
+              src="/octo.png"
+              alt="logo"
+              className="h-[50px] p-[1px]"
+            />
+          </h1>
         </div>
       )}
     </div>
