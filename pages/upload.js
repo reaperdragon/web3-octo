@@ -54,7 +54,6 @@ const Upload = () => {
   const clientApollo = useApolloClient();
 
   const triggerOnChangeCover = () => {
-    console.log("Clicking");
     imageCoverRef.current.click();
   };
 
@@ -103,16 +102,12 @@ const Upload = () => {
       })
       .then(({ data }) => {
         const b = data?.blogs?.find((blog) => blog.id === editBlog);
-        console.log(b?.blogcoverhash);
-        console.log(b?.blogtitle);
-        console.log(b?.blogcontent);
-        console.log(b);
 
         setBlog({
           title: b?.blogtitle,
           content: b?.blogcontent,
           category: b?.category,
-          cover:  b?.blogcoverhash,
+          cover: b?.blogcoverhash,
         });
       })
       .catch((error) => {
@@ -136,22 +131,18 @@ const Upload = () => {
       toast.error("Please provide Blog Cover image For the Blog");
     } else {
       setLoading(true);
-      console.log("Clicking");
       const url = await uploadFile(file);
-      console.log(url);
       publishBlog(url.data.id);
     }
   };
 
   const publishBlog = async (cover) => {
     try {
-      console.log("working")
       const contract = await getContract();
 
       let uploadDate = String(new Date());
 
       if (editBlog) {
-        
         await contract.updateblog(
           editBlog,
           cover,
@@ -168,9 +159,6 @@ const Upload = () => {
           uploadDate
         );
       }
-
-      console.log("working")
-
       setLoading(false);
 
       setBlog({
@@ -200,10 +188,6 @@ const Upload = () => {
       file: "",
     });
   };
-
-  console.log(blog);
-
-  console.log(editBlog);
 
   if (!bundlrInstance) {
     return (
@@ -262,7 +246,7 @@ const Upload = () => {
                 : window.URL.createObjectURL(blog?.cover)
             }
             alt="image"
-            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center cursor-pointer" 
+            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center cursor-pointer"
           />
         ) : null}
         <button

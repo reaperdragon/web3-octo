@@ -13,8 +13,6 @@ const BlogContainer = ({ data }) => {
     setAddr(addr);
   }, []);
 
-  console.log(data)
-
   return (
     <div
       key={data.id}

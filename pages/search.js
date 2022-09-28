@@ -1,66 +1,65 @@
-import { gql, useApolloClient } from '@apollo/client';
-import Head from 'next/head';
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import {BlogContainer, Header} from '../components'
+import { gql, useApolloClient } from "@apollo/client";
+import Head from "next/head";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { BlogContainer, Header } from "../components";
 
 const Search = () => {
-    const [searchFilter, setSearchFilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState("");
 
-    const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
-    const clientApollo = useApolloClient();
+  const clientApollo = useApolloClient();
 
-    const SEARCH_BLOG = useMemo(
-      () => gql`
-        query blogs(
-          $orderBy: Blog_orderBy
-          $orderDirection: OrderDirection
-          $where: Blog_filter
+  const SEARCH_BLOG = useMemo(
+    () => gql`
+      query blogs(
+        $orderBy: Blog_orderBy
+        $orderDirection: OrderDirection
+        $where: Blog_filter
+      ) {
+        blogs(
+          orderBy: $orderBy
+          orderDirection: $orderDirection
+          where: $where
         ) {
-          blogs(
-            orderBy: $orderBy
-            orderDirection: $orderDirection
-            where: $where
-          ) {
-            id
-            blogcoverhash
-            blogtitle
-            category
-            user
-          }
+          id
+          blogcoverhash
+          blogtitle
+          category
+          user
         }
-      `,
-      []
-    );
-  
-   const getBlogs = useCallback(async () => {
-     clientApollo
-       .query({
-         query: SEARCH_BLOG,
-         variables: {
-           orderBy: "createdAt",
-           orderDirection: "desc",
-           where: {
-             ...(searchFilter && {
-               blogtitle_contains_nocase: searchFilter,
-             }),
-           },
-         },
-         fetchPolicy: "network-only",
-       })
-       .then(({ data }) => {
-         console.log(data);
-         setBlogs(data);
-       })
-       .catch((error) => {
-         console.error(error);
-       });
-   }, [SEARCH_BLOG, clientApollo, searchFilter]);
+      }
+    `,
+    []
+  );
 
-   useEffect(() => {
-     getBlogs();
-   }, [searchFilter, getBlogs]);
-  
+  const getBlogs = useCallback(async () => {
+    clientApollo
+      .query({
+        query: SEARCH_BLOG,
+        variables: {
+          orderBy: "createdAt",
+          orderDirection: "desc",
+          where: {
+            ...(searchFilter && {
+              blogtitle_contains_nocase: searchFilter,
+            }),
+          },
+        },
+        fetchPolicy: "network-only",
+      })
+      .then(({ data }) => {
+        setBlogs(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [SEARCH_BLOG, clientApollo, searchFilter]);
+
+  useEffect(() => {
+    getBlogs();
+  }, [searchFilter, getBlogs]);
+
   return (
     <div className="font-body">
       <Head>
@@ -91,6 +90,6 @@ const Search = () => {
       )}
     </div>
   );
-}
+};
 
-export default Search
+export default Search;
