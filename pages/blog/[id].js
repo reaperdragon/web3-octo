@@ -89,7 +89,11 @@ const Blog = () => {
           <div className="flex flex-col gap-2 items-center justify-center ">
             <div className="max-w-[800px] max-h-[400px] relative rounded-xl mb-10 md:max-w-[680px] md:max-h-[400px] mx-auto my-0">
               <img
-                src={url + blog?.blogcoverhash}
+                src={
+                  blog?.blogcoverhash?.includes(url)
+                    ? blog?.blogcoverhash
+                    : url + blog?.blogcoverhash
+                }
                 alt={blog.category}
                 className="w-full h-[400px] rounded-xl"
               />

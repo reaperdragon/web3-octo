@@ -112,7 +112,7 @@ const Upload = () => {
           title: b?.blogtitle,
           content: b?.blogcontent,
           category: b?.category,
-          cover: b?.blogcoverhash,
+          cover:  b?.blogcoverhash,
         });
       })
       .catch((error) => {
@@ -137,9 +137,9 @@ const Upload = () => {
     } else {
       setLoading(true);
       console.log("Clicking");
-      const url = await uploadFile(file);
-      console.log(url);
-      publishBlog(url.data.id);
+        const url = await uploadFile(file);
+        console.log(url);
+        publishBlog(url.data.id);
     }
   };
 
@@ -159,15 +159,15 @@ const Upload = () => {
           blog.content,
           blog.category
         );
+      } else {
+        await contract.createblog(
+          cover,
+          blog.title,
+          blog.content,
+          blog.category,
+          uploadDate
+        );
       }
-
-      await contract.createblog(
-        cover,
-        blog.title,
-        blog.content,
-        blog.category,
-        uploadDate
-      );
 
       setLoading(false);
 
@@ -262,8 +262,8 @@ const Upload = () => {
           <img
             src={
               editBlog
-                ? url + blog?.cover
-                : window.URL.createObjectURL(blog.cover)
+                ?  blog?.cover
+                : window.URL.createObjectURL(blog?.cover)
             }
             alt="image"
             ref={imageCoverRef}

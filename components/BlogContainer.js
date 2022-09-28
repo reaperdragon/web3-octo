@@ -13,6 +13,8 @@ const BlogContainer = ({ data }) => {
     setAddr(addr);
   }, []);
 
+  console.log(data)
+
   return (
     <div
       key={data.id}
@@ -21,7 +23,7 @@ const BlogContainer = ({ data }) => {
     >
       <div className="w-full h-[300px] rounded-lg relative">
         <img
-          src={url + data.blogcoverhash}
+          src={ data?.blogcoverhash.includes(url) ? data?.blogcoverhash : url + data.blogcoverhash}
           alt={data.blogtitle}
           className="w-full h-full rounded-lg"
         />
