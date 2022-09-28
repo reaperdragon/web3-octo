@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import "easymde/dist/easymde.min.css";
@@ -10,13 +10,31 @@ import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import ContractABI from "../artifacts/contracts/Blog.sol/BlogApp.json";
 import { useRouter } from "next/router";
+import { gql, useApolloClient } from "@apollo/client";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
+const url = `http://arweave.net/`;
+
+const FETCH_BLOGS = gql`
+  query blogs($orderBy: String!, $orderDirection: String!) {
+    blogs(orderBy: $orderBy, orderDirection: $orderDirection) {
+      id
+      blogcoverhash
+      blogtitle
+      blogcontent
+      category
+      user
+      date
+      createdAt
+    }
+  }
+`;
+
 const Upload = () => {
-  const { initialiseBundlr, bundlrInstance, balance, uploadFile } =
+  const { initialiseBundlr, bundlrInstance, balance, uploadFile, editBlog } =
     useBundler();
 
   const router = useRouter();
@@ -31,9 +49,12 @@ const Upload = () => {
   const [file, setFile] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const imageCoverRef = useRef();
+  const imageCoverRef = useRef(null);
+
+  const clientApollo = useApolloClient();
 
   const triggerOnChangeCover = () => {
+    console.log("Clicking");
     imageCoverRef.current.click();
   };
 
@@ -70,6 +91,39 @@ const Upload = () => {
     return contract;
   };
 
+  const getBlogs = async () => {
+    clientApollo
+      .query({
+        query: FETCH_BLOGS,
+        variables: {
+          orderBy: "createdAt",
+          orderDirection: "desc",
+        },
+        fetchPolicy: "network-only",
+      })
+      .then(({ data }) => {
+        const b = data?.blogs?.find((blog) => blog.id === editBlog);
+        console.log(b?.blogcoverhash);
+        console.log(b?.blogtitle);
+        console.log(b?.blogcontent);
+        console.log(b);
+
+        setBlog({
+          title: b?.blogtitle,
+          content: b?.blogcontent,
+          category: b?.category,
+          cover: b?.blogcoverhash,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    getBlogs();
+  }, []);
+
   const handleUpload = async () => {
     const { title, category, content, cover } = blog;
     if (title === "") {
@@ -84,16 +138,28 @@ const Upload = () => {
       setLoading(true);
       console.log("Clicking");
       const url = await uploadFile(file);
+      console.log(url);
       publishBlog(url.data.id);
     }
   };
 
+  console.log(file);
+
   const publishBlog = async (cover) => {
-  
     try {
       const contract = await getContract();
 
       let uploadDate = String(new Date());
+
+      if (editBlog) {
+        await contract.updateblog(
+          editBlog,
+          blog.cover,
+          blog.title,
+          blog.content,
+          blog.category
+        );
+      }
 
       await contract.createblog(
         cover,
@@ -133,6 +199,16 @@ const Upload = () => {
     });
   };
 
+  useEffect(() => {
+    if (editBlog) {
+      imageCoverRef?.current?.focus();
+    }
+  }, [editBlog]);
+
+  console.log(blog);
+
+  console.log(editBlog);
+
   if (!bundlrInstance) {
     return (
       <div className="justify-center items-center h-screen flex font-body flex-col">
@@ -151,7 +227,11 @@ const Upload = () => {
     );
   }
 
-  if (!balance || Number(balance) <= 0) {
+  if (
+    !balance ||
+    (Number(balance) <= 0 && !balance) ||
+    Number(balance) <= 0.02
+  ) {
     return (
       <div className="flex flex-col items-center justify-center h-screen ">
         <h3 className="text-4xl font-body text-center">
@@ -180,13 +260,14 @@ const Upload = () => {
       <div className="max-w-[1440px] mt-2 mb-0 mx-auto md:p-6 flex flex-col items-center justify-center">
         {blog.cover ? (
           <img
-            src={window.URL.createObjectURL(blog.cover)}
+            src={
+              editBlog
+                ? url + blog?.cover
+                : window.URL.createObjectURL(blog.cover)
+            }
             alt="image"
             ref={imageCoverRef}
             className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center cursor-pointer"
-            onClick={() => {
-              imageCoverRef.current.click();
-            }}
           />
         ) : null}
         <button

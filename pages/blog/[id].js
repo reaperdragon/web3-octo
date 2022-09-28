@@ -11,6 +11,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeRaw from "rehype-raw";
 import { Edit } from "iconsax-react";
+import { useBundler } from "../../context/bundlrContext";
 
 const url = `http://arweave.net/`;
 
@@ -37,6 +38,8 @@ const Blog = () => {
   const [relatedBlogs, setRelatedBlogs] = useState([]);
 
   const [addr, setAddr] = useState("");
+
+  const { setEditBlog } = useBundler();
 
   const clientApollo = useApolloClient();
 
@@ -118,6 +121,10 @@ const Blog = () => {
                       className={`${
                         blog.user === addr ? `block cursor-pointer` : `hidden`
                       } `}
+                      onClick={() => {
+                        setEditBlog(blog.id);
+                        router.push("/upload");
+                      }}
                     >
                       <Edit size="32" color="#d9e3f0" />
                     </div>

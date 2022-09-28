@@ -51,7 +51,7 @@ const Dashboard = () => {
       </Head>
       <Header />
       <div className="mt-8 font-body">
-        <h1 className=" text-center text-9xl font-bold">Octo 🐙</h1>
+        <h1 className=" text-center text-9xl font-bold sm:text-lg">Octo 🐙</h1>
         <div className="my-10 grid overflow-hidden grid-cols-3 grid-rows-2 gap-6  h-max md:grid-cols-2 sm:grid-cols-1 px-[28px] sm:px-1 sm:gap-1  max-w-[1440px] mx-auto md:gap-y-8 sm:gap-y-4">
           {blogs &&
             blogs?.blogs?.map((data) => (
