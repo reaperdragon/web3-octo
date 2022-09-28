@@ -137,24 +137,24 @@ const Upload = () => {
     } else {
       setLoading(true);
       console.log("Clicking");
-        const url = await uploadFile(file);
-        console.log(url);
-        publishBlog(url.data.id);
+      const url = await uploadFile(file);
+      console.log(url);
+      publishBlog(url.data.id);
     }
   };
 
-  console.log(file);
-
   const publishBlog = async (cover) => {
     try {
+      console.log("working")
       const contract = await getContract();
 
       let uploadDate = String(new Date());
 
       if (editBlog) {
+        
         await contract.updateblog(
           editBlog,
-          blog.cover,
+          cover,
           blog.title,
           blog.content,
           blog.category
@@ -168,6 +168,8 @@ const Upload = () => {
           uploadDate
         );
       }
+
+      console.log("working")
 
       setLoading(false);
 
@@ -198,12 +200,6 @@ const Upload = () => {
       file: "",
     });
   };
-
-  useEffect(() => {
-    if (editBlog) {
-      imageCoverRef?.current?.focus();
-    }
-  }, [editBlog]);
 
   console.log(blog);
 
@@ -258,16 +254,15 @@ const Upload = () => {
       />
 
       <div className="max-w-[1440px] mt-2 mb-0 mx-auto md:p-6 flex flex-col items-center justify-center">
-        {blog.cover ? (
+        {blog?.cover ? (
           <img
             src={
               editBlog
-                ?  blog?.cover
+                ? url + blog?.cover
                 : window.URL.createObjectURL(blog?.cover)
             }
             alt="image"
-            ref={imageCoverRef}
-            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center cursor-pointer"
+            className="w-[60%] h-[420px] rounded-md md:h-[280px] md:w-[80%] self-center cursor-pointer" 
           />
         ) : null}
         <button
