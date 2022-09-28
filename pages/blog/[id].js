@@ -91,7 +91,7 @@ const Blog = () => {
               <img
                 src={url + blog?.blogcoverhash}
                 alt={blog.category}
-                className="w-full h-full rounded-xl"
+                className="w-full h-[400px] rounded-xl"
               />
               <div className="flex items-center justify-center">
                 <p className="absolute w-auto text-center bottom-2 left-auto right-auto backdrop-blur-sm bg-white/40 p-4 rounded-full  ">
