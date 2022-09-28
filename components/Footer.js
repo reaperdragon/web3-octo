@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -11,9 +12,9 @@ const Footer = () => {
       </h1>
       <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
         © {new Date().getFullYear()}{" "}
-        <a href="#" class="hover:underline">
-          Octo™
-        </a>
+        <Link href="/dashboard">
+          <a class="hover:underline">Octo™</a>
+        </Link>
         . All Rights Reserved.
       </span>
     </footer>

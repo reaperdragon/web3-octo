@@ -43,7 +43,7 @@ export default function Home() {
               alt="logo"
               className="h-[150px] animate-bounce"
             />
-            <h2 className="text-[80px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 my-2 leading-[120px] sm:text-[50px] md:leading-normal sm:text-[30px]">
+            <h2 className="text-[80px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-800 my-2 leading-[120px] md:leading-normal sm:text-[30px]">
               The Web 3 Publishing Hub{" "}
             </h2>
             <p className="semibold text-gray-500 my-[26px] font-medium text-3xl sm:text-2xl">
