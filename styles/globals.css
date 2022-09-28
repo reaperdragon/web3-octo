@@ -146,3 +146,9 @@ button {
   color: white !important;
   font-weight: 600;
 }
+
+.nav_links {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}

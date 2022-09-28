@@ -33,7 +33,7 @@ const BlogContainer = ({ data }) => {
           </p>
         </div>
       </div>
-      <h3 className="text-white text-3xl my-2 font-semibold">
+      <h3 className="text-white text-3xl my-2 font-semibold md:text-xl sm:text-xl">
         {data?.blogtitle?.length > 20
           ? data?.blogtitle?.slice(0, 20) + "..."
           : data?.blogtitle}
