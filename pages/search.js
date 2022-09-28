@@ -68,7 +68,7 @@ const Search = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className="flex items-center justify-center mt-8">
+      <div className="flex items-center justify-center mt-8 mb-3">
         <input
           placeholder="Search Blog"
           value={searchFilter}
