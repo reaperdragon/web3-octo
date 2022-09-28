@@ -95,7 +95,7 @@ const Header = () => {
             {truncateEthAddress(addr)}
           </p>
 
-          <div className="hidden sm:block" onClick={toggle}>
+          <div className="hidden sm:block cursor-pointer" onClick={toggle}>
             <HambergerMenu size="32" color="#d9e3f0" />
           </div>
         </nav>

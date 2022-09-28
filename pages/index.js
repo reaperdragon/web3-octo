@@ -36,7 +36,7 @@ export default function Home() {
       {isWalletConnected && localStorage.getItem("walletAddress") ? (
         <Dashboard />
       ) : (
-        <div className="h-screen flex items-center  font-body justify-center text-center">
+        <div className="h-screen flex items-center  font-body justify-center text-center sm:px-2">
           <div>
             <img
               src="/octo.png"
