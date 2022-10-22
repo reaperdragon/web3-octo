@@ -24,6 +24,7 @@
 - Style : [Tailwind CSS](https://tailwindcss.com/)
 - State management : [GraphQL Apollo Client](https://www.apollographql.com/)
 - Toast: [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
+- Fonts - [Google Fonts](https://fonts.google.com/)
 - Editor: [React SimpleMDE Markdown Editor](https://github.com/RIP21/react-simplemde-editor)
 - Markdown Preview - [React Markdown](https://remarkjs.github.io/react-markdown/)
 - Icons : [Iconsax React](https://iconsax-react.pages.dev/)
